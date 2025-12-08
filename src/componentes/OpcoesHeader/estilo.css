@@ -1,17 +1,8 @@
 .opcoes {
     display: flex;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
     
-}
-
-.opcao{
-    font-size: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    height: 100%;
-    padding: 0 5px;
-    cursor: pointer;
-    min-width: 120px;
 }
 

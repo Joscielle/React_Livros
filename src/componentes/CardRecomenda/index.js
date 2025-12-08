@@ -1,4 +1,4 @@
-import './estilo.css';
+/*import './estilo.css';
 
 function CardRecomenda({titulo, subtitulo, descricao, img}) {
     return(
@@ -12,4 +12,4 @@ function CardRecomenda({titulo, subtitulo, descricao, img}) {
     )
 }
 
-export default CardRecomenda;
+export default CardRecomenda;*/
