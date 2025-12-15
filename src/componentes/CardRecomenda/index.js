@@ -1,15 +1,22 @@
-/*import './estilo.css';
+import './estilo.css'
+import Titulo from '../Titulo';
+import SubTitulo from '../Subtitulo';
+import Descricao from '../Descricao';
 
-function CardRecomenda({titulo, subtitulo, descricao, img}) {
+function CardRecomenda({titulo, subtitulo, descricao, img}){
     return(
-        <div className="recomenda">
-            <h3>{titulo}</h3>
-            <h4>{subtitulo}</h4>
-            <p>{descricao}</p>
-            <img src={img}/>
-            <button>Saiba Mais</button>
-        </div>
-    )
+        <div className='recomendacoes'>
+            <div>
+                <Titulo>{titulo}</Titulo>
+                <SubTitulo>{subtitulo}</SubTitulo>
+                <Descricao>{descricao}</Descricao>
+                <div>
+                    <img src={img}/>
+                    <button></button>
+                </div>
+            </div>
+        
+        </div> 
+    );
 }
-
-export default CardRecomenda;*/
+export default CardRecomenda;

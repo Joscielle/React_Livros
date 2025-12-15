@@ -1,40 +1,51 @@
-import Subtitulo from '../Subtitulo';
+import './estilo.css';
+import SubTitulo from '../Subtitulo';
 import Titulo from '../Titulo';
-import './estilo.css'
-import { useState } from 'react';
-import { livros } from './dadosPesquiva';
 import Resultado from '../Resultado';
+import { useEffect, useState } from 'react';
+import {getLivros} from '../../servicos/livros';
+import { postFavoritos } from '../../servicos/favoritos';
 
+function PesquisaContainer() {
+  const [livrosPesquisados, setLivrosPesquisados] = useState([]);
+  const [livros, setLivros] = useState([]);
 
-function PesquisaContainer(){
-    const [ livrosPesquisados, setLivrosPesquisados ] = useState([]);
-    
-    return(
-        <section className='section'>
+  useEffect (() => {
+    fetchLivros()
+  }, [])
 
-            <Titulo>Já sabe por onde começar?</Titulo>
-            <Subtitulo>Encontre seu produto</Subtitulo>
-            
-            <input placeholder="Digite aqui o que deseja" 
-            onBlur={evento => {
-                const textoDigitado = evento.target.value;
-                const resultadoPesquisa = livros.filter( livro => livro.nome.includes(textoDigitado));
-                setLivrosPesquisados(resultadoPesquisa);
-            }}
-            />
-                {livrosPesquisados.map ( livro => (
-                    <Resultado>
-                        <p>{livro.nome}</p>
-                        <img src={livro.src} alt='livro'/>
-                    </Resultado>
+  async function fetchLivros(){
+    const livrosDaAPI = await getLivros()
+    setLivros(livrosDaAPI);
+  }
 
-                    
-                ))
-                }
-            
-        </section>
-                   
-    )
-    
+  async function insertFavoritos(id) {
+    await postFavoritos(id)
+    alert(`Livro de id:${id} adicionado!`)
+  }
+
+  return (
+    <section className = 'PesquisaContainer'>
+        <Titulo>Ja sabe por onde começar?</Titulo>
+        <SubTitulo>Encontre seu produto</SubTitulo>
+        <input className="input" placeholder="Digite o nome do produto"
+        onBlur={evento => {
+            const textoDigitado = evento.target.value
+            const resultadoPesquisa = livros.filter(livro => livro.nome.includes(textoDigitado)
+        )
+        setLivrosPesquisados(resultadoPesquisa);
+        console.log(livrosPesquisados)
+        }}
+        />
+        {livrosPesquisados.map(livro => (
+        <Resultado key={livro.id} onClick={() => insertFavoritos(livro.id)}>
+            <p>{livro.nome}</p>
+            <img src={livro.src} alt='livro'></img>
+        </Resultado>
+        ))}
+    </section>
+
+  );
 }
+
 export default PesquisaContainer;

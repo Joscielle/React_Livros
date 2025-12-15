@@ -1,8 +1,8 @@
 import './estilo.css'
 
-export default function Resultado({children}) {
+export default function Resultado({children, onClick}) {
     return(
-        <div className="resultadoPesquisa">
+        <div className="resultadoPesquisa" onClick={onClick}>
             {children}
         </div>
     )
